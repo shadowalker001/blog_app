@@ -61,7 +61,7 @@ class BlogFormScreenState extends State<BlogFormScreen> {
       }
     } catch (e) {
       // Handle errors
-      showMessage("Unable to create blog post");
+      showMessage("Unable to create blog post at this time");
       setIsLoading(false);
     }
   }

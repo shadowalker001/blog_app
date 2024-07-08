@@ -1,4 +1,5 @@
 import 'package:blog_app/graphql/graphql_config.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -112,8 +113,14 @@ class BlogListScreenState extends State<BlogListScreen> {
             {VoidCallback? refetch, FetchMore? fetchMore}) {
           if (result.hasException) {
             // Show error message if there's an exception
-            showError(result.exception.toString());
-            return const Text("Unable to fetch blogs");
+            WidgetsBinding.instance.addPostFrameCallback((timeStamp) async {
+              showError("Failed to connect, make sure your network is stable!");
+            });
+            if (kDebugMode) {
+              print(result.exception.toString());
+            }
+            return const Center(
+                child: Text("Opps! Unable to fetch blogs at this time."));
           }
 
           if (result.isLoading) {
@@ -209,8 +216,10 @@ class BlogListScreenState extends State<BlogListScreen> {
           builder: (QueryResult result,
               {VoidCallback? refetch, FetchMore? fetchMore}) {
             if (result.hasException) {
-              // Handle error here
-              showError(result.exception.toString());
+              // Show error message if there's an exception
+              if (kDebugMode) {
+                print(result.exception.toString());
+              }
             }
             return FloatingActionButton(
               onPressed: () async {
