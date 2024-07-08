@@ -1,8 +1,8 @@
-import 'package:blog_app/services/blog_service.dart';
+import 'package:blog_app/graphql/graphql_config.dart';
 
 String fetchAllBlogs = """
 query fetchAllBlogs {
-  ${BlogService.allBlogPosts} {
+  ${GraphQLConfig.allBlogPosts} {
     id
     title
     subTitle
@@ -14,7 +14,7 @@ query fetchAllBlogs {
 
 String getBlog = """
 query getBlog(\$blogId: String!) {
-  ${BlogService.blogPost}(blogId: \$blogId) {
+  ${GraphQLConfig.blogPost}(blogId: \$blogId) {
     id
     title
     subTitle
@@ -26,7 +26,7 @@ query getBlog(\$blogId: String!) {
 
 String createBlogPost = """
 mutation createBlogPost(\$title: String!, \$subTitle: String!, \$body: String!) {
-  ${BlogService.createBlog}(title: \$title, subTitle: \$subTitle, body: \$body) {
+  ${GraphQLConfig.createBlog}(title: \$title, subTitle: \$subTitle, body: \$body) {
     success
     blogPost {
       id
@@ -41,7 +41,7 @@ mutation createBlogPost(\$title: String!, \$subTitle: String!, \$body: String!) 
 
 String updateBlogPost = """
 mutation updateBlogPost(\$blogId: String!, \$title: String!, \$subTitle: String!, \$body: String!) {
-  ${BlogService.updateBlog}(blogId: \$blogId, title: \$title, subTitle: \$subTitle, body: \$body) {
+  ${GraphQLConfig.updateBlog}(blogId: \$blogId, title: \$title, subTitle: \$subTitle, body: \$body) {
     success
     blogPost {
       id
@@ -56,7 +56,7 @@ mutation updateBlogPost(\$blogId: String!, \$title: String!, \$subTitle: String!
 
 String deleteBlogPost = """
 mutation deleteBlogPost(\$blogId: String!) {
-  ${BlogService.deleteBlog}(blogId: \$blogId) {
+  ${GraphQLConfig.deleteBlog}(blogId: \$blogId) {
     success
   }
 }

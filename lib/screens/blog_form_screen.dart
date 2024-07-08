@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import '../services/blog_service.dart';
 
@@ -24,6 +22,12 @@ class BlogFormScreenState extends State<BlogFormScreen> {
     });
   }
 
+  void showMessage(String message, {bool isError = true}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text((isError ? 'Error: ' : '') + message)),
+    );
+  }
+
   void _submitForm() async {
     if (pageLoader) return;
 
@@ -31,6 +35,14 @@ class BlogFormScreenState extends State<BlogFormScreen> {
       String title = _titleController.text;
       String subTitle = _subTitleController.text;
       String body = _bodyController.text;
+
+      if (title.trim().isEmpty ||
+          subTitle.trim().isEmpty ||
+          body.trim().isEmpty) {
+        //invalid form
+        showMessage("Form not properly filled!");
+        return;
+      }
 
       setIsLoading(true);
       // Perform create blog post operation
@@ -40,17 +52,16 @@ class BlogFormScreenState extends State<BlogFormScreen> {
 
       if (success) {
         // Handle success scenario (e.g., navigate back to blog list)
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Blog post created successfully')),
-        );
+        showMessage("Blog post created successfully", isError: false);
+        // ignore: use_build_context_synchronously
         Navigator.pop(context, true); // Navigate back and pass success status
       } else {
         // Handle failure scenario
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Failed to create blog post')),
-        );
+        showMessage("Failed to create blog post");
       }
     } catch (e) {
+      // Handle errors
+      showMessage("Unable to create blog post");
       setIsLoading(false);
     }
   }

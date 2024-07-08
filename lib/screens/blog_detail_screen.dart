@@ -24,18 +24,26 @@ class _BlogDetailScreenState extends State<BlogDetailScreen> {
   late Completer<BlogPost> _completer;
 
   Future<void> _deleteBlogPost(BuildContext context) async {
-    bool success = await widget.blogService.deleteBlogPostService(_blogPost.id);
+    try {
+      bool success =
+          await widget.blogService.deleteBlogPostService(_blogPost.id);
 
-    if (success) {
-      // Handle success scenario (e.g., navigate back to blog list)
+      if (success) {
+        // Handle success scenario (e.g., navigate back to blog list)
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Blog post deleted successfully')),
+        );
+        Navigator.pop(context, true); // Navigate back and pass success status
+      } else {
+        // Handle failure scenario (e.g., show error message)
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Failed to delete blog post')),
+        );
+      }
+    } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Blog post deleted successfully')),
-      );
-      Navigator.pop(context, true); // Navigate back and pass success status
-    } else {
-      // Handle failure scenario (e.g., show error message)
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Failed to delete blog post')),
+        const SnackBar(
+            content: Text('Unable to delete blog post at this time')),
       );
     }
   }

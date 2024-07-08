@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import '../models/blog_post.dart';
 import '../services/blog_service.dart'; // Import BlogService
@@ -35,9 +33,23 @@ class BlogEditScreenState extends State<BlogEditScreen> {
     });
   }
 
+  void showMessage(String message, {bool isError = true}) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text((isError ? 'Error: ' : '') + message)),
+    );
+  }
+
   void _submitForm() async {
     if (pageLoader) return;
     try {
+      if (_titleController.text.trim().isEmpty ||
+          _subTitleController.text.trim().isEmpty ||
+          _bodyController.text.trim().isEmpty) {
+        //invalid form
+        showMessage("Form not properly filled!");
+        return;
+      }
+
       setIsLoading(true);
       // Perform update blog post operation
       var result = await widget.blogService.updateBlogPostService(
@@ -54,15 +66,13 @@ class BlogEditScreenState extends State<BlogEditScreen> {
           body: _bodyController.text,
           subTitle: _subTitleController.text,
           title: _titleController.text,
+          isBookmarked: widget.blogPost.isBookmarked,
         );
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Blog post updated successfully!'),
-        ));
+        showMessage("Blog post updated successfully!", isError: false);
+        // ignore: use_build_context_synchronously
         Navigator.pop(context, updatedBlog);
       } else {
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Failed to update blog post.'),
-        ));
+        showMessage("Failed to update blog post.");
       }
     } catch (e) {
       setIsLoading(false);

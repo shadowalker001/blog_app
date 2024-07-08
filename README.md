@@ -1,16 +1,28 @@
-# blog_app
+# Blog Application (blog_app)
 
-A new Flutter project.
+This is a Flutter-based mobile application (iOS/Android) that serves as a simple blog reader. The application allows users to:
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Features
 
-A few resources to get you started if this is your first Flutter project:
+- View a list of blog posts fetched from a GraphQL API.
+- View the details of each blog post.
+- Update existing blog posts.
+- Delete existing blog posts.
+- Blog search by title or subtitle.
+- Blog bookmarking
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## Installation
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+To run this application locally, follow these steps:
+
+### Prerequisites
+
+- **Flutter SDK**: Ensure that you have the Flutter SDK installed. You can download it from [flutter.dev](https://flutter.dev).
+
+### Steps
+
+1. **Clone the repository**:
+   ```sh
+   git clone https://github.com/shadowalker001/blog_app.git
+   cd your-repo
