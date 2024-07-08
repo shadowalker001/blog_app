@@ -1,5 +1,6 @@
 import 'package:blog_app/graphql/graphql_config.dart';
 
+// GraphQL query to fetch all blog posts
 String fetchAllBlogs = """
 query fetchAllBlogs {
   ${GraphQLConfig.allBlogPosts} {
@@ -12,6 +13,7 @@ query fetchAllBlogs {
 }
 """;
 
+// GraphQL query to fetch a single blog post by ID
 String getBlog = """
 query getBlog(\$blogId: String!) {
   ${GraphQLConfig.blogPost}(blogId: \$blogId) {
@@ -24,6 +26,7 @@ query getBlog(\$blogId: String!) {
 }
 """;
 
+// GraphQL mutation to create a new blog post
 String createBlogPost = """
 mutation createBlogPost(\$title: String!, \$subTitle: String!, \$body: String!) {
   ${GraphQLConfig.createBlog}(title: \$title, subTitle: \$subTitle, body: \$body) {
@@ -39,6 +42,7 @@ mutation createBlogPost(\$title: String!, \$subTitle: String!, \$body: String!) 
 }
 """;
 
+// GraphQL mutation to update an existing blog post
 String updateBlogPost = """
 mutation updateBlogPost(\$blogId: String!, \$title: String!, \$subTitle: String!, \$body: String!) {
   ${GraphQLConfig.updateBlog}(blogId: \$blogId, title: \$title, subTitle: \$subTitle, body: \$body) {
@@ -54,6 +58,7 @@ mutation updateBlogPost(\$blogId: String!, \$title: String!, \$subTitle: String!
 }
 """;
 
+// GraphQL mutation to delete a blog post by ID
 String deleteBlogPost = """
 mutation deleteBlogPost(\$blogId: String!) {
   ${GraphQLConfig.deleteBlog}(blogId: \$blogId) {
