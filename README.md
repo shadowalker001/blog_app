@@ -25,4 +25,4 @@ To run this application locally, follow these steps:
 1. **Clone the repository**:
    ```sh
    git clone https://github.com/shadowalker001/blog_app.git
-   cd your-repo
+   cd blog_app
