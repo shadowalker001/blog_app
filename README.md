@@ -14,9 +14,9 @@ This is a Flutter-based mobile application (iOS/Android) that serves as a simple
 
 ## Screenshots
 
-![Screenshot 1](assets\screenshots\Screenshot_1720411600.png)
-![Screenshot 2](assets\screenshots\Screenshot_1720411608.png)
-![Screenshot 3](assets\screenshots\Screenshot_1720411626.png)
+![Screenshot 1](assets/screenshots/Screenshot_1720411600.png)
+![Screenshot 2](assets/screenshots/Screenshot_1720411608.png)
+![Screenshot 3](assets/screenshots/Screenshot_1720411626.png)
 
 ## Installation
 
